@@ -32,7 +32,13 @@ def velo_to_cam(points_xyz: np.ndarray, calib: KittiCalib) -> np.ndarray:
       3. Trả về 3 cột đầu.
     Tự kiểm: một điểm velodyne (10, 0, 0) phải có z_cam ~ 10 (phía trước camera).
     """
-    raise NotImplementedError("TODO(CP2): cài đặt velo_to_cam")
+    pts = np.asarray(points_xyz, dtype=np.float64).reshape(-1, 3)
+    # 1. Toạ độ đồng nhất: [x, y, z] -> [x, y, z, 1]
+    pts_h = np.hstack([pts, np.ones((len(pts), 1))])
+    # 2. T_cam_velo (4x4) nhân với vector cột -> với ma trận hàng (N, 4) thì nhân với T^T
+    pts_cam = pts_h @ calib.T_cam_velo.T
+    # 3. Bỏ thành phần đồng nhất
+    return pts_cam[:, :3]
 
 
 def cam_to_image(points_cam: np.ndarray, P2: np.ndarray, image_shape: tuple[int, ...],
@@ -52,7 +58,23 @@ def cam_to_image(points_cam: np.ndarray, P2: np.ndarray, image_shape: tuple[int,
       3. Chia cho s để có (u, v). Chỉ chia với điểm có depth > min_depth.
       4. Lọc theo kích thước ảnh image_shape[:2] = (H, W).
     """
-    raise NotImplementedError("TODO(CP2): cài đặt cam_to_image")
+    pts = np.asarray(points_cam, dtype=np.float64).reshape(-1, 3)
+    h, w = image_shape[:2]
+    # 1. Bỏ NaN/Inf, rồi bỏ điểm nằm sau camera hoặc quá sát camera (z_cam <= min_depth)
+    finite = np.isfinite(pts).all(axis=1)
+    front = np.zeros(len(pts), dtype=bool)
+    front[finite] = pts[finite, 2] > min_depth
+    # 2. Toạ độ đồng nhất rồi nhân P2: (M, 4) @ (4, 3) -> (M, 3) = [s*u, s*v, s]
+    pts_h = np.hstack([pts[front], np.ones((int(front.sum()), 1))])
+    proj = pts_h @ np.asarray(P2, dtype=np.float64).T
+    # 3. Chia cho s (chỉ làm với điểm đã qua lọc depth nên s > 0, không chia cho 0)
+    uv_front = proj[:, :2] / proj[:, 2:3]
+    # 4. Chỉ giữ điểm nằm trong khung ảnh 0 <= u < W, 0 <= v < H
+    in_img = ((uv_front[:, 0] >= 0) & (uv_front[:, 0] < w) &
+              (uv_front[:, 1] >= 0) & (uv_front[:, 1] < h))
+    mask = np.zeros(len(pts), dtype=bool)
+    mask[np.flatnonzero(front)[in_img]] = True
+    return uv_front[in_img], pts[mask, 2], mask
 
 
 def project_velo_to_image(points: np.ndarray, calib: KittiCalib, image_shape: tuple[int, ...]):
