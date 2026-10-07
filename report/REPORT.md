@@ -1,59 +1,35 @@
-# Báo cáo Day 6: [ĐIỀN tên đề tài ngắn]
+# Báo cáo Day 6: Kiểm tra calibration LiDAR-camera bằng projection
 
-> Thay **mọi** ô có chữ ĐIỀN nằm trong ngoặc vuông bằng nội dung của bạn, xoá luôn cả dấu ngoặc vuông. Lệnh `python tools/check_submission.py` sẽ báo FAIL nếu còn sót bất kỳ chỗ nào.
-
-- **Họ tên:** [ĐIỀN]
-- **MSSV:** [ĐIỀN] (phải trùng với MSSV trong tên repo `<HoVaTen>-<MSSV>-Track4-Day21`)
-- **Lớp:** [ĐIỀN]
-- **Link repo:** [ĐIỀN]
-- **Topic:** [ĐIỀN một chữ cái A/B/C/D/E/F] — [ĐIỀN tên topic]
-- **Dataset:** [ĐIỀN một hoặc nhiều trong: data/synthetic, data/kitti_mini, data/nuscenes_mini_subset, log riêng]
-- **Các frame đã dùng:** [ĐIỀN danh sách frame id, ví dụ 000011, 000049 hoặc scene-0103_010]
-
-> Hãy viết ngắn: mỗi mục từ 3 đến 8 dòng, ưu tiên số liệu và hình ảnh.
+- **Họ tên:** Phạm Minh Hiếu
+- **MSSV:** 2A202602919
+- **Lớp:** VinUni AI20K — Track 4
+- **Link repo:** https://github.com/BenKei-19/PhamMinhHieu-2A202602919-Track4-Day21
+- **Topic:** A — LiDAR-camera projection QA
+- **Dataset:** data/kitti_mini (thí nghiệm chính), data/nuscenes_mini_subset (so sánh), data/synthetic (debug)
+- **Các frame đã dùng:** KITTI: toàn bộ 20 frame; nuScenes: toàn bộ 80 keyframe
 
 ## 1. Claim
 
-Một câu khẳng định kỹ thuật có thể kiểm chứng. Ví dụ: *"Lệch yaw 1° làm 12% điểm LiDAR rơi ra khỏi vật thể ở 30 m, phát hiện được bằng edge-alignment score với ngưỡng X."*
-
-[ĐIỀN]
+(Nháp CP1) Lệch yaw 1° làm hơn 10% điểm LiDAR của object rơi ra ngoài 2D box ở xe xa > 30 m, trong khi % điểm nằm trong FOV gần như không đổi.
 
 ## 2. Evidence
 
-Bảng hoặc plot số liệu, kèm ảnh/video demo. Ghi rõ đường dẫn file trong `results/`.
-
-| Cấu hình / mức perturb | Metric 1 | Metric 2 | Ghi chú |
-|---|---|---|---|
-| [ĐIỀN] | | | |
-
-![demo](../results/figures/[ĐIỀN].png)
+(đang làm)
 
 ## 3. Failure case
 
-Nêu khi nào hệ thống hoặc phương pháp fail, vì sao fail, và liên hệ tới lớp nào trong 6 lớp debug: I/O, Geometry, Time, Preprocess, Model, Metric.
-
-![failure](../results/figures/fail_[ĐIỀN].png)
-
-[ĐIỀN]
+(đang làm)
 
 ## 4. Khuyến nghị nếu triển khai thật
 
-Use-case cụ thể (ADAS / robot / drone), trade-off và bước tiếp theo.
-
-[ĐIỀN]
+(đang làm)
 
 ## 5. Cách chạy lại
 
-Các lệnh tái tạo lại toàn bộ kết quả từ repo sạch.
-
 ```bash
-[ĐIỀN]
+python -m starter.data_health --data-root data/synthetic
 ```
 
 ## 6. Khai báo sử dụng AI
 
-Ghi rõ đã dùng công cụ AI nào, dùng vào việc gì, và bạn đã tự kiểm chứng kết quả đó bằng cách nào. Nếu không dùng AI, ghi "Không sử dụng". Xem quy định ở `RULES.md` mục 2.
-
-| Công cụ | Dùng cho việc gì | Bạn đã kiểm chứng thế nào |
-|---|---|---|
-| [ĐIỀN] | | |
+(đang làm)
