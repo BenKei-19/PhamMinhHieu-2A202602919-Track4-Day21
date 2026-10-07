@@ -1,0 +1,19 @@
+check,frame,value,rule,verdict
+NaN/Inf trong point cloud,000000,"23 điểm (0.10%), cột: ['x', 'y', 'z']",số điểm không hữu hạn > 0,LỖI
+NaN/Inf trong point cloud,000001,"23 điểm (0.10%), cột: ['x', 'y', 'z']",số điểm không hữu hạn > 0,LỖI
+NaN/Inf trong point cloud,000002,"23 điểm (0.10%), cột: ['x', 'y', 'z']",số điểm không hữu hạn > 0,LỖI
+NaN/Inf trong point cloud,000003,"22 điểm (0.10%), cột: ['x', 'y', 'z']",số điểm không hữu hạn > 0,LỖI
+NaN/Inf trong point cloud,000004,"23 điểm (0.10%), cột: ['x', 'y', 'z']",số điểm không hữu hạn > 0,LỖI
+Thiếu điểm,000003,22041 điểm = 92.8% trung vị (23758),< 97% trung vị,LỖI
+Mất sector azimuth,000003,"[-40°, -5°] (0° = phía trước, dương = bên trái), mất ~1648 điểm",bin 5° < 50% trung vị bin đó,LỖI
+Timestamp nhảy cóc / đi lùi,000002->000003,dt = 0.200 s (trung vị 0.100 s) -> ~1 frame bị rơi,dt <= 0 hoặc > 1.5x trung vị,LỖI
+Calib giống frame đầu,000000,chênh lớn nhất 0.00e+00,chênh > 1e-6 là lỗi,OK
+Calib giống frame đầu,000001,chênh lớn nhất 0.00e+00,chênh > 1e-6 là lỗi,OK
+Calib giống frame đầu,000002,chênh lớn nhất 0.00e+00,chênh > 1e-6 là lỗi,OK
+Calib giống frame đầu,000003,chênh lớn nhất 0.00e+00,chênh > 1e-6 là lỗi,OK
+Calib giống frame đầu,000004,chênh lớn nhất 0.00e+00,chênh > 1e-6 là lỗi,OK
+Label khớp point cloud,000000,"2/2 object có >= 10 điểm, box-hit thấp nhất 99.5%",box-hit < 90% là lỗi,OK
+Label khớp point cloud,000001,"2/2 object có >= 10 điểm, box-hit thấp nhất 100.0%",box-hit < 90% là lỗi,OK
+Label khớp point cloud,000002,"2/2 object có >= 10 điểm, box-hit thấp nhất 100.0%",box-hit < 90% là lỗi,OK
+Label khớp point cloud,000003,"2/2 object có >= 10 điểm, box-hit thấp nhất 100.0%",box-hit < 90% là lỗi,OK
+Label khớp point cloud,000004,"2/2 object có >= 10 điểm, box-hit thấp nhất 100.0%",box-hit < 90% là lỗi,OK
